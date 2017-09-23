@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sort"
 )
-
+//his exercise 1 was different than mine
 type people []string
 
 func (p people) Len()int{return len(p)}
@@ -22,3 +22,4 @@ func main(){
 	fmt.Println(studyGroup)
 
 }
+// his #2 and #3 were the same.
