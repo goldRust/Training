@@ -2,10 +2,10 @@ package main
 
 import "fmt"
 
-type person struct{
+type person struct {
 	first string
-	last string
-	age int
+	last  string
+	age   int
 }
 
 type DoubleZero struct {
@@ -13,18 +13,17 @@ type DoubleZero struct {
 	LicenseToKill bool
 }
 
-
-func (p person) fullName() string{
+func (p person) fullName() string {
 	return p.last + p.first + p.last
 }
 
-func main(){
-	p1:= DoubleZero{
-		person{"James","Bond",20},
+func main() {
+	p1 := DoubleZero{
+		person{"James", "Bond", 20},
 		true,
 	}
-p2:= DoubleZero{person{"Miss", "MoneyPenny",19},
-false,}
+	p2 := DoubleZero{person{"Miss", "MoneyPenny", 19},
+		false}
 
-fmt.Println(p1,p2)
+	fmt.Println(p1, p2)
 }

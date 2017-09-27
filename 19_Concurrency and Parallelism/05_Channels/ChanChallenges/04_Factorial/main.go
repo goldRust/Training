@@ -19,21 +19,20 @@ import "fmt"
 
 //Use goroutines and channels to calc factorials
 
-func main(){
-	channel:=make(chan int)
-    n:=10
+func main() {
+	channel := make(chan int)
+	n := 10
 	go func() {
-		for i:=n;i>0;i--{
-			channel<-i
+		for i := n; i > 0; i-- {
+			channel <- i
 		}
 		close(channel)
 	}()
 
-	total:=1
-	for i:=range channel{
-		total*=i
+	total := 1
+	for i := range channel {
+		total *= i
 	}
 	fmt.Println(total)
-
 
 }

@@ -1,13 +1,12 @@
 package main
 
 import (
-	"sort"
 	"fmt"
+	"sort"
 )
 
 //This is from the "Sort Package" Video
 type people []string
-
 
 //This first main answers #1 exercise
 //func main(){
@@ -16,7 +15,6 @@ type people []string
 //	sort.Strings(studyGroup)
 //	fmt.Println(studyGroup)
 //}
-
 
 // Reverse #1
 //func main(){
@@ -27,7 +25,6 @@ type people []string
 //	sort.Sort(sort.Reverse(sort.StringSlice(studyGroup)))
 //	fmt.Println(studyGroup)
 //}
-
 
 //This answers #2 exercise
 //func main()  {
@@ -48,8 +45,6 @@ type people []string
 //	fmt.Println(s)
 //}
 
-
-
 //#3 exercise
 //func main() {
 //	n:=[]int{7,4,8,2,9,19,12,32,3}
@@ -60,7 +55,7 @@ type people []string
 
 // Reverse #3
 func main() {
-	n:=[]int{7,4,8,2,9,19,12,32,3}
+	n := []int{7, 4, 8, 2, 9, 19, 12, 32, 3}
 	fmt.Println(n)
 	sort.Ints(n)
 	fmt.Println(n)

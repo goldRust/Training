@@ -1,22 +1,22 @@
 package main
 
 import (
-	"net/http"
-	"log"
-	"io/ioutil"
 	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
 )
 
-func main(){
+func main() {
 	res, err := http.Get("http://www.gutenberg.org/files/2701/old/moby10b.txt")
-	if err != nil{
+	if err != nil {
 		log.Fatal(err)
 	}
-	page,err:= ioutil.ReadAll(res.Body)
+	page, err := ioutil.ReadAll(res.Body)
 	res.Body.Close()
-	if err != nil{
+	if err != nil {
 		log.Fatal(err)
 	}
 	//Call me Ishmale
-	fmt.Printf("%s",page[35072:35088])
+	fmt.Printf("%s", page[35072:35088])
 }

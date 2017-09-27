@@ -2,10 +2,10 @@ package _0_make
 
 import "fmt"
 
-func main(){
-	var myGreeting  = make(map[string]string)
+func main() {
+	var myGreeting = make(map[string]string)
 	myGreeting["Tim"] = "Good Morning."
-	myGreeting["Jenny"]="Bonjour."
+	myGreeting["Jenny"] = "Bonjour."
 	fmt.Println(myGreeting)
 
 }

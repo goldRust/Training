@@ -3,15 +3,10 @@ package main
 import "fmt"
 
 func main() {
-	//set up the pipeline.
-	c := gen(2, 3, 4, 5, 6)
-	out := sq(c)
-
-	//Consume the output.
-	for n := range out {
-		fmt.Println(n)
+	// Set up the pipeline and consume the output.
+	for n := range sq(sq(gen(2, 3, 4, 5))) {
+		fmt.Println(n) //16 then 81
 	}
-
 }
 
 func gen(nums ...int) chan int {

@@ -1,25 +1,23 @@
 package main
 
 import (
-	"fmt"
 	"bufio"
+	"fmt"
 	"os"
 )
 
-func main(){
-	c:= sender()
+func main() {
+	c := sender()
 	fmt.Println(c)
 
 }
 
-
-func sender() chan string{
-	out:= make(chan string)
+func sender() chan string {
+	out := make(chan string)
 	go func() {
-ln:=" "
-	message,_:= fmt.Scanf("%s",ln)
-	out<-message
-}()
-return out
+		ln := " "
+		message, _ := fmt.Scanf("%s", ln)
+		out <- message
+	}()
+	return out
 }
-

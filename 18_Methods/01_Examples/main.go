@@ -1,8 +1,8 @@
 package main
 
 import (
-	"math"
 	"fmt"
+	"math"
 )
 
 type circle struct {
@@ -13,20 +13,21 @@ type shape interface {
 	area() float64
 	circumference() float64
 }
+
 //Method set of circle includes circumference and area.
-func (c circle) circumference() float64{
-	return 2*math.Pi*c.radius
+func (c circle) circumference() float64 {
+	return 2 * math.Pi * c.radius
 }
-func (c circle) area() float64{
-	return math.Pi*c.radius*c.radius
+func (c circle) area() float64 {
+	return math.Pi * c.radius * c.radius
 }
-func info(s shape){
+func info(s shape) {
 	fmt.Println("Circumference:", s.circumference())
 	fmt.Println("Area:", s.area())
 }
-func main()  {
+func main() {
 
-	c:=circle{5}
+	c := circle{5}
 	info(c)
 
 }

@@ -1,47 +1,46 @@
 package main
 
 import (
-	"net/http"
-	"log"
 	"bufio"
 	"fmt"
-
+	"log"
+	"net/http"
 )
 
-func main(){
+func main() {
 	//get the book moby dick
 	res, err := http.Get("http://www.gutenberg.org/files/2701/old/moby10b.txt")
-	if err !=nil{
+	if err != nil {
 		log.Fatal(err)
 	}
 	//scan the page
-	scanner:=bufio.NewScanner(res.Body)
+	scanner := bufio.NewScanner(res.Body)
 	defer res.Body.Close()
 	//set the split function for the scanning operation.
 	scanner.Split(bufio.ScanWords)
 	//Create slice to hold counts
-	buckets := make([]int,200)
+	buckets := make([]int, 200)
 	//Loop over the words
-	for scanner.Scan(){
-		n:= HashBucket(scanner.Text())
+	for scanner.Scan() {
+		n := HashBucket(scanner.Text())
 		buckets[n]++
 	}
 	var allWords int
-	for _,letter:= range buckets{
-		allWords+=letter
+	for _, letter := range buckets {
+		allWords += letter
 	}
-fmt.Println(buckets)
-	for i:=65;i<123;i++{
+	fmt.Println(buckets)
+	for i := 65; i < 123; i++ {
 
 		l := string(i)
-		percentage :=100*(buckets[i]/allWords)
+		percentage := 100 * (buckets[i] / allWords)
 
-		fmt.Println(l,": ", percentage,"%")
+		fmt.Println(l, ": ", percentage, "%")
 	}
 
 }
 
-func HashBucket(word string)int  {
-	return int (word[0])
+func HashBucket(word string) int {
+	return int(word[0])
 
 }
