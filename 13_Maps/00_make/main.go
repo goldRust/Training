@@ -1,4 +1,4 @@
-package _0_make
+package main
 
 import "fmt"
 

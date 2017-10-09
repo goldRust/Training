@@ -2,34 +2,34 @@ package main
 
 import "fmt"
 
-type Person struct {
+type person struct {
 	Name string
 	age  int
 }
-type DoubleZero struct {
-	Person
+type doubleZero struct {
+	person
 	LicenseToKill bool
 }
 
-func (p Person) Greeting() {
+func (p person) greeting() {
 	fmt.Println("I'm just a regular person.")
 }
-func (dz DoubleZero) Greeting() {
+func (dz doubleZero) greeting() {
 	fmt.Println("Miss Moneypenny, so good to see you.")
 }
 func main() {
-	p1 := Person{
+	p1 := person{
 		"Ian Flemming",
 		44,
 	}
-	p2 := DoubleZero{
-		Person{
+	p2 := doubleZero{
+		person{
 			"James Bond",
 			23,
 		},
 		true,
 	}
-	p1.Greeting()
-	p2.Greeting()
-	p2.Person.Greeting()
+	p1.greeting()
+	p2.greeting()
+	p2.person.greeting()
 }

@@ -8,7 +8,7 @@ type person struct {
 	age   int
 }
 
-type DoubleZero struct {
+type doubleZero struct {
 	person
 	LicenseToKill bool
 }
@@ -18,11 +18,11 @@ func (p person) fullName() string {
 }
 
 func main() {
-	p1 := DoubleZero{
+	p1 := doubleZero{
 		person{"James", "Bond", 20},
 		true,
 	}
-	p2 := DoubleZero{person{"Miss", "MoneyPenny", 19},
+	p2 := doubleZero{person{"Miss", "MoneyPenny", 19},
 		false}
 
 	fmt.Println(p1, p2)

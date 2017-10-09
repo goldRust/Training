@@ -5,40 +5,40 @@ import (
 	"math"
 )
 
-type Square struct {
+type square struct {
 	side float64
 }
-type Circle struct {
+type circle struct {
 	radius float64
 }
-type Rectangle struct {
+type rectangle struct {
 	height float64
 	width  float64
 }
 
-func (c Circle) area() float64 {
+func (c circle) area() float64 {
 	return math.Pi * c.radius * c.radius
 }
-func (z Square) area() float64 {
+func (z square) area() float64 {
 	return z.side * z.side
 }
-func (r Rectangle) area() float64 {
+func (r rectangle) area() float64 {
 	return r.height * r.width
 }
 
-type Shape interface {
+type shape interface {
 	area() float64
 }
 
-func info(z Shape) {
+func info(z shape) {
 	fmt.Println(z)
 	fmt.Println(z.area())
 }
 
 func main() {
-	s := Square{10}
-	c := Circle{10}
-	r := Rectangle{10, 12}
+	s := square{10}
+	c := circle{10}
+	r := rectangle{10, 12}
 	info(s)
 	info(c)
 	info(r)

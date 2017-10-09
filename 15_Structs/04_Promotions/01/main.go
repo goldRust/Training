@@ -8,19 +8,19 @@ type person struct {
 	age   int
 }
 
-type DoubleZero struct {
+type doubleZero struct {
 	person
 	First         string
 	LicenseToKill bool
 }
 
 func main() {
-	p1 := DoubleZero{
+	p1 := doubleZero{
 		person{"James", "Bond", 20},
 		"Double Zero Seven",
 		true,
 	}
-	p2 := DoubleZero{
+	p2 := doubleZero{
 		person{"Miss", "MoneyPenny", 19},
 		"If looks could kill...",
 		false,

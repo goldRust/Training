@@ -30,7 +30,7 @@ func main() {
 	}
 
 	var i int
-	for k, _ := range words {
+	for k := range words {
 		fmt.Println(k)
 		if i == 200 {
 			break

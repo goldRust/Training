@@ -7,38 +7,36 @@ import (
 )
 
 func main() {
-	in:= gen()
+	in := gen()
 	//FAN OUT
 	//Multiple functions reading from the same channel until that channel is closed.
 	//Distribute work across multiple functions (ten goroutines) that all read from in.
 
-	c0:= factorial(in)
-	c1:= factorial(in)
-	c2:= factorial(in)
-	c3:= factorial(in)
-	c4:= factorial(in)
-	c5:= factorial(in)
-	c6:= factorial(in)
-	c7:= factorial(in)
-	c8:= factorial(in)
-	c9:= factorial(in)
+	c0 := factorial(in)
+	c1 := factorial(in)
+	c2 := factorial(in)
+	c3 := factorial(in)
+	c4 := factorial(in)
+	c5 := factorial(in)
+	c6 := factorial(in)
+	c7 := factorial(in)
+	c8 := factorial(in)
+	c9 := factorial(in)
 
-
-
-	num:=0
-//FAN IN
-	for n:= range merge(c0,c1,c2,c3,c4,c5,c6,c7,c8,c9){
+	num := 0
+	//FAN IN
+	for n := range merge(c0, c1, c2, c3, c4, c5, c6, c7, c8, c9) {
 		num++
-		fmt.Println(num, ": ",n)
+		fmt.Println(num, ": ", n)
 	}
 }
 
-func gen()<-chan int64{
-	out:= make(chan int64)
+func gen() <-chan int64 {
+	out := make(chan int64)
 	go func() {
-		for i:=0;i<100;i++{
-			for j:=3;j<13;j++{
-				out<-int64(j)
+		for i := 0; i < 100; i++ {
+			for j := 3; j < 13; j++ {
+				out <- int64(j)
 			}
 		}
 		close(out)
@@ -46,10 +44,10 @@ func gen()<-chan int64{
 	return out
 }
 func factorial(in <-chan int64) <-chan int64 {
-	out:= make(chan int64)
+	out := make(chan int64)
 	go func() {
-		for n:= range in{
-			out<- fact(n)
+		for n := range in {
+			out <- fact(n)
 
 		}
 		close(out)
@@ -58,9 +56,9 @@ func factorial(in <-chan int64) <-chan int64 {
 }
 
 func fact(n int64) int64 {
-	total:=int64(1)
-	for i:=n;i>0;i--{
-		total*=int64(i)
+	total := int64(1)
+	for i := n; i > 0; i-- {
+		total *= int64(i)
 	}
 	return total
 }
@@ -68,10 +66,9 @@ func fact(n int64) int64 {
 func merge(cs ...<-chan int64) chan int64 {
 	var wg sync.WaitGroup
 
-	out:=make(chan int64)
+	out := make(chan int64)
 
-
-	output:= func(c<-chan int64) {
+	output := func(c <-chan int64) {
 		for n := range c {
 			out <- n
 		}
@@ -79,7 +76,7 @@ func merge(cs ...<-chan int64) chan int64 {
 	}
 
 	wg.Add(len(cs))
-	for _, c:= range cs{
+	for _, c := range cs {
 		go output(c)
 	}
 

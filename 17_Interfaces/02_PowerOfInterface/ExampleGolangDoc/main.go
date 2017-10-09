@@ -5,37 +5,37 @@ import (
 	"sort"
 )
 
-type Person struct {
+type person struct {
 	Name string
 	Age  int
 }
 
-func (p Person) String() string {
+func (p person) String() string {
 	return fmt.Sprintf("%s: %d", p.Name, p.Age)
 }
 
 // ByAge implements sort.Interface for []Person based on
 // the Age field.
-type ByAge []Person
+type byAge []person
 
-func (a ByAge) Len() int           { return len(a) }
-func (a ByAge) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a ByAge) Less(i, j int) bool { return a[i].Age < a[j].Age }
+func (a byAge) Len() int           { return len(a) }
+func (a byAge) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a byAge) Less(i, j int) bool { return a[i].Age < a[j].Age }
 
-type ByName []Person
+type byName []person
 
-func (n ByName) Len() int           { return len(n) }
-func (n ByName) Swap(i, j int)      { n[i], n[j] = n[j], n[i] }
-func (n ByName) Less(i, j int) bool { return n[i].Name < n[j].Name }
+func (n byName) Len() int           { return len(n) }
+func (n byName) Swap(i, j int)      { n[i], n[j] = n[j], n[i] }
+func (n byName) Less(i, j int) bool { return n[i].Name < n[j].Name }
 
-type ByNameLength []Person
+type byNameLength []person
 
-func (nl ByNameLength) Len() int           { return len(nl) }
-func (nl ByNameLength) Swap(i, j int)      { nl[i], nl[j] = nl[j], nl[i] }
-func (nl ByNameLength) Less(i, j int) bool { return len(nl[i].Name) < len(nl[j].Name) }
+func (nl byNameLength) Len() int           { return len(nl) }
+func (nl byNameLength) Swap(i, j int)      { nl[i], nl[j] = nl[j], nl[i] }
+func (nl byNameLength) Less(i, j int) bool { return len(nl[i].Name) < len(nl[j].Name) }
 
 func main() {
-	people := []Person{
+	people := []person{
 		{"Bob", 31},
 		{"John", 42},
 		{"Michael", 17},
@@ -43,11 +43,11 @@ func main() {
 	}
 
 	fmt.Println(people)
-	sort.Sort(ByAge(people))
+	sort.Sort(byAge(people))
 	fmt.Println(people)
-	sort.Sort(ByName(people))
+	sort.Sort(byName(people))
 	fmt.Println(people)
-	sort.Sort(ByNameLength(people))
+	sort.Sort(byNameLength(people))
 	fmt.Println(people)
 
 }

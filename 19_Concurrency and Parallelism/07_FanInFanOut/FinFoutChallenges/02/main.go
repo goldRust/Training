@@ -5,28 +5,28 @@ import (
 	"sync"
 )
 
-func main(){
- 	in:= gen()
+func main() {
+	in := gen()
 
- 	// FAN OUT
- 	//Multiple functions reading from the same channel until that channel is closed.
- 	//Distribute work across multiple functions (ten goroutines) that all read from in.
- 	xc:= fanOut(in, 10)
+	// FAN OUT
+	//Multiple functions reading from the same channel until that channel is closed.
+	//Distribute work across multiple functions (ten goroutines) that all read from in.
+	xc := fanOut(in, 10)
 
- 	//FAN IN
- 	// Multiplex multiple channels onto a single channel
- 	//merge the channels from c0 through c9 onto a single channel.
-	 for n:= range merge(xc...){
-	 	fmt.Println(n)
-	 }
- }
+	//FAN IN
+	// Multiplex multiple channels onto a single channel
+	//merge the channels from c0 through c9 onto a single channel.
+	for n := range merge(xc...) {
+		fmt.Println(n)
+	}
+}
 
 func gen() <-chan int {
 	out := make(chan int)
 	go func() {
-		for i:=0; i<10; i++{
-			for j:=3; j<10; j++{
-				out<- j
+		for i := 0; i < 10; i++ {
+			for j := 3; j < 10; j++ {
+				out <- j
 			}
 		}
 		close(out)
@@ -35,19 +35,19 @@ func gen() <-chan int {
 
 }
 
- func fanOut(in <-chan int, n int)[]<-chan int{
- 	var xc []<-chan int //This needs to be set to the zero value of a Slice.
- 	for i:=0; i<n;i++{
- 		xc= append(xc, factorial(in))
+func fanOut(in <-chan int, n int) []<-chan int {
+	var xc []<-chan int //This needs to be set to the zero value of a Slice.
+	for i := 0; i < n; i++ {
+		xc = append(xc, factorial(in))
 	}
 	return xc
- }
+}
 
 func factorial(in <-chan int) <-chan int {
-	out:= make(chan int)
+	out := make(chan int)
 	go func() {
-		for n:= range in{
-			out<- fact(n)
+		for n := range in {
+			out <- fact(n)
 		}
 		close(out)
 	}()
@@ -55,26 +55,26 @@ func factorial(in <-chan int) <-chan int {
 }
 
 func fact(n int) int {
-	total:= 1
-	for i:=n;i>0;i--{
-		total *=i
+	total := 1
+	for i := n; i > 0; i-- {
+		total *= i
 	}
 	return total
 }
 
 func merge(cs ...<-chan int) <-chan int {
 	var wg sync.WaitGroup
-	out:= make(chan int)
+	out := make(chan int)
 
-	output:= func(c <-chan int){
-		for n:= range c{
+	output := func(c <-chan int) {
+		for n := range c {
 			out <- n
 		}
 		wg.Done()
 	}
 
 	wg.Add(len(cs))
-	for _, c:= range cs{
+	for _, c := range cs {
 		go output(c)
 	}
 	//Start a goroutine to close once all the output goroutines are done.
